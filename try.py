@@ -128,6 +128,7 @@ def update():
 		uentry4.delete(0, END)
 		uentry5.delete(0, END)
 
+	#Labels, Entries and button for root2 window.
 	button8 = Button(root2,activebackground="green", text="UPDATE ITEM",bd=8, bg=buttoncolor, fg=buttonfg, width=25, font=("Times", 12),command=actualupdate)
 	button9 = Button(root2,activebackground="green", text="CLEAR",bd=8, bg=buttoncolor, fg=buttonfg, width=25, font=("Times", 12),command=clearuitem)
 	ulabel0 = Label(root2,text="UPDATE RECORD",bg="Black",fg="#F9FAE9",font=("Times", 30),width=23)
