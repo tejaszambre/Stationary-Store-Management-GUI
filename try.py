@@ -60,25 +60,22 @@ def searchitem():
 	entry4.delete(0, END)
 	entry5.delete(0, END)
 	e6 = entry6.get()
-	if e6 == "SEARCH":{
+	if e6 == "SEARCH" or e6 == "":{
 		messagebox.showinfo("Warning","Please first enter Item name for search")
 	}
-	elif e6 == "":{
-		messagebox.showinfo("Warning","Please enter the Item name for search")
-	}
-
-	my_cursor.execute("select * from stationary where item_name = '{0}'".format(str(e6)))
-	mytext1 = my_cursor.fetchone()
-	if mytext1 == None:
-		messagebox.showinfo("Error","Element not exist")
 	else:
-		entry1.insert(0,mytext1[0])
-		entry2.insert(0,mytext1[1])
-		entry3.insert(0,mytext1[2])
-		entry4.insert(0,mytext1[3])
-		entry5.insert(0,mytext1[4])
-		entry6.delete(0, END)
-		entry6.insert(0,"SEARCH")
+		my_cursor.execute("select * from stationary where item_name = '{0}'".format(str(e6)))
+		mytext1 = my_cursor.fetchone()
+		if mytext1 == None:
+			messagebox.showinfo("Error","Element not exist")
+		else:
+			entry1.insert(0,mytext1[0])
+			entry2.insert(0,mytext1[1])
+			entry3.insert(0,mytext1[2])
+			entry4.insert(0,mytext1[3])
+			entry5.insert(0,mytext1[4])
+			entry6.delete(0, END)
+			entry6.insert(0,"SEARCH")
 
 def update():
 	entry1.delete(0, END)
@@ -98,6 +95,9 @@ def update():
 		e4 = uentry4.get()
 		e5 = uentry5.get()
 		e6 = uentry6.get()
+		if e6 == "Item Name" or e6 == "":
+			messagebox.showinfo("Warning","Enter the item First")
+
 		my_cursor.execute("select * from stationary where item_name = '{0}'".format(str(e6)))
 		line = my_cursor.fetchone()
 		iname = line[0]
