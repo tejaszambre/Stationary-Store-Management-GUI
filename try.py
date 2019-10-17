@@ -11,6 +11,12 @@ my_cursor.execute("create table if not exists stationary(item_name VARCHAR(20) n
 root = Tk()
 root.title("Stationary Store Managment System")
 root.configure(width=1500,height=600,bg="Grey")
+
+buttoncolor = "#49D810"
+buttonfg = "black"
+
+
+
 #All functions
 
 def additem():
@@ -78,102 +84,111 @@ def searchitem():
 			entry6.insert(0,"SEARCH")
 
 def update():
-	entry1.delete(0, END)
-	entry2.delete(0, END)
-	entry3.delete(0, END)
-	entry4.delete(0, END)
-	entry5.delete(0, END)
-	entry6.delete(0, END)
-	root2 = Tk()
-	root2.title("Update Records")
-	root2.configure(width=900,height=500,bg="Grey")
+	e6 = entry6.get()
+	if e6 == "SEARCH" or e6 == "":
+		messagebox.showinfo("Warning","Enter the item First")
 
-	def actualupdate():
-		e1 = uentry1.get()
-		e2 = uentry2.get()
-		e3 = uentry3.get()
-		e4 = uentry4.get()
-		e5 = uentry5.get()
-		e6 = uentry6.get()
-		if e6 == "Item Name" or e6 == "":
-			messagebox.showinfo("Warning","Enter the item First")
-
+	else:
 		my_cursor.execute("select * from stationary where item_name = '{0}'".format(str(e6)))
 		line = my_cursor.fetchone()
-		iname = line[0]
-		iprice = line[1]
-		iquantity = line[2]
-		icategory = line[3]
-		idiscount = line[4]
-		if e1!="Update":
-			iname=e1
-		if e2!="Update":
-			iprice=e2
-		if e3!="Update":
-			iquantity=e3
-		if e4!="Update":
-			icategory=e4
-		if e5!="Update":
-			idiscount=e5
-		sql = "update stationary set item_name = %s, item_price = %s, item_quantity = %s, item_category = %s, item_discount = %s  where item_name = %s"
-		val = (str(iname),iprice,iquantity,str(icategory),idiscount,str(e6))
-		my_cursor.execute(sql,val)
-		mydb.commit()
-		messagebox.showinfo("UPDATE ITEM", "ITEM UPDATED SUCCESSFULLY....!!!")
-		uentry1.delete(0, END)
-		uentry2.delete(0, END)
-		uentry3.delete(0, END)
-		uentry4.delete(0, END)
-		uentry5.delete(0, END)
-		uentry6.delete(0, END)
-		entry6.insert(0,"SEARCH")
-		root2.destroy()
+		if line != None:
+			iname = line[0]
+			iprice = line[1]
+			iquantity = line[2]
+			icategory = line[3]
+			idiscount = line[4]
 
-	def clearuitem():
-		uentry1.delete(0, END)
-		uentry2.delete(0, END)
-		uentry3.delete(0, END)
-		uentry4.delete(0, END)
-		uentry5.delete(0, END)
+			root2 = Tk()
+			root2.title("Update Records")
+			root2.configure(width=900,height=500,bg="Grey")
 
-	#Labels, Entries and button for root2 window.
-	button8 = Button(root2,activebackground="green", text="UPDATE ITEM",bd=8, bg=buttoncolor, fg=buttonfg, width=25, font=("Times", 12),command=actualupdate)
-	button9 = Button(root2,activebackground="green", text="CLEAR",bd=8, bg=buttoncolor, fg=buttonfg, width=25, font=("Times", 12),command=clearuitem)
-	ulabel0 = Label(root2,text="UPDATE RECORD",bg="Black",fg="#F9FAE9",font=("Times", 30),width=23)
-	ulabel1 = Label(root2,text="ENTER ITEM NAME",bg="black",relief="ridge",fg="white",bd=8,font=("Times", 12),width=25)
-	uentry1 = Entry(root2, font=("Times", 14),bd=8,width=25,bg="white")
-	ulabel2 = Label(root2, text="ENTER ITEM PRICE",relief="ridge",height="1",bg="black",bd=8,fg="white", font=("Times", 12),width=25)
-	uentry2 = Entry(root2, font=("Times", 14),bd=8,width=25,bg="white")
-	ulabel3 = Label(root2, text="ENTER ITEM QUANTITY",relief="ridge",bg="black",bd=8,fg="white", font=("Times", 12),width=25)
-	uentry3 = Entry(root2, font=("Times", 14),bd=8,width=25,bg="white")
-	ulabel4 = Label(root2, text="ENTER ITEM CATEGORY",relief="ridge",bg="black",bd=8,fg="white", font=("Times", 12),width=25)
-	uentry4 = Entry(root2, font=("Times", 14),bd=8,width=25,bg="white")
-	ulabel5 = Label(root2, text="ENTER ITEM DISCOUNT",bg="black",relief="ridge",fg="white",bd=8, font=("Times", 12),width=25)
-	uentry5 = Entry(root2, font=("Times", 14),bd=8,width=25,bg="white")
-	ulabel6 = Label(root2,text="ITEM NAME TO BE UPDATED",bg="black",relief="ridge",fg="white",bd=8,font=("Times", 12),width=25)
-	uentry6 = Entry(root2, font=("Times", 14),bd=8,width=25,bg="white")
-	ulabel0.grid(columnspan=6, padx=10, pady=10)
-	ulabel1.grid(row=2,column=0, padx=10, pady=10)
-	ulabel2.grid(row=3,column=0, padx=10, pady=10)
-	ulabel3.grid(row=4,column=0, padx=10, pady=10)
-	ulabel4.grid(row=5,column=0, padx=10, pady=10)
-	ulabel5.grid(row=6,column=0, padx=10, pady=10)
-	ulabel6.grid(row=1,column=0, padx=10, pady=10)
-	uentry1.grid(row=2,column=1, padx=10, pady=10)
-	uentry2.grid(row=3,column=1, padx=10, pady=10)
-	uentry3.grid(row=4,column=1, padx=10, pady=10)
-	uentry4.grid(row=5,column=1, padx=10, pady=10)
-	uentry5.grid(row=6,column=1, padx=10, pady=10)
-	uentry6.grid(row=1,column=1, padx=10, pady=10)
-	button8.grid(row=7,column=1, padx=10, pady=10)
-	button9.grid(row=7,column=0,padx=10,pady=10)
-	uentry1.insert(0,"Update")
-	uentry2.insert(0,"Update")
-	uentry3.insert(0,"Update")
-	uentry4.insert(0,"Update")
-	uentry5.insert(0,"Update")
-	uentry6.insert(0,"Item Name")
-	entry6.insert(0,"SEARCH")
+			def actualupdate():
+				e1 = uentry1.get()
+				e2 = uentry2.get()
+				e3 = uentry3.get()
+				e4 = uentry4.get()
+				e5 = uentry5.get()
+				e6 = uentry6.get()
+				
+				if e1!="Update" or e1!="":
+					iname=e1
+				if e2!="Update" or e1!="":
+					iprice=e2
+				if e3!="Update" or e1!="":
+					iquantity=e3
+				if e4!="Update" or e1!="":
+					icategory=e4
+				if e5!="Update" or e1!="":
+					idiscount=e5
+				sql = "update stationary set item_name = %s, item_price = %s, item_quantity = %s, item_category = %s, item_discount = %s  where item_name = %s"
+				val = (str(iname),iprice,iquantity,str(icategory),idiscount,str(e6))
+				my_cursor.execute(sql,val)
+				mydb.commit()
+				messagebox.showinfo("UPDATE ITEM", "ITEM UPDATED SUCCESSFULLY....!!!")
+				uentry1.delete(0, END)
+				uentry2.delete(0, END)
+				uentry3.delete(0, END)
+				uentry4.delete(0, END)
+				uentry5.delete(0, END)
+				uentry6.delete(0, END)
+				root2.destroy()
+
+			def clearuitem():
+				uentry1.delete(0, END)
+				uentry2.delete(0, END)
+				uentry3.delete(0, END)
+				uentry4.delete(0, END)
+				uentry5.delete(0, END)
+
+
+			#Labels, Entries and button for root2 window.
+			button8 = Button(root2,activebackground="green", text="UPDATE ITEM",bd=8, bg=buttoncolor, fg=buttonfg, width=25, font=("Times", 12),command=actualupdate)
+			button9 = Button(root2,activebackground="green", text="CLEAR",bd=8, bg=buttoncolor, fg=buttonfg, width=25, font=("Times", 12),command=clearuitem)
+			ulabel0 = Label(root2,text="UPDATE RECORD",bg="Black",fg="#F9FAE9",font=("Times", 30),width=23)
+			ulabel1 = Label(root2,text="ENTER ITEM NAME",bg="black",relief="ridge",fg="white",bd=8,font=("Times", 12),width=25)
+			uentry1 = Entry(root2, font=("Times", 14),bd=8,width=25,bg="white")
+			ulabel2 = Label(root2, text="ENTER ITEM PRICE",relief="ridge",height="1",bg="black",bd=8,fg="white", font=("Times", 12),width=25)
+			uentry2 = Entry(root2, font=("Times", 14),bd=8,width=25,bg="white")
+			ulabel3 = Label(root2, text="ENTER ITEM QUANTITY",relief="ridge",bg="black",bd=8,fg="white", font=("Times", 12),width=25)
+			uentry3 = Entry(root2, font=("Times", 14),bd=8,width=25,bg="white")
+			ulabel4 = Label(root2, text="ENTER ITEM CATEGORY",relief="ridge",bg="black",bd=8,fg="white", font=("Times", 12),width=25)
+			uentry4 = Entry(root2, font=("Times", 14),bd=8,width=25,bg="white")
+			ulabel5 = Label(root2, text="ENTER ITEM DISCOUNT",bg="black",relief="ridge",fg="white",bd=8, font=("Times", 12),width=25)
+			uentry5 = Entry(root2, font=("Times", 14),bd=8,width=25,bg="white")
+			ulabel6 = Label(root2,text="ITEM NAME TO BE UPDATED",bg="black",relief="ridge",fg="white",bd=8,font=("Times", 12),width=25)
+			uentry6 = Entry(root2, font=("Times", 14),bd=8,width=25,bg="white")
+			ulabel0.grid(columnspan=6, padx=10, pady=10)
+			ulabel1.grid(row=2,column=0, padx=10, pady=10)
+			ulabel2.grid(row=3,column=0, padx=10, pady=10)
+			ulabel3.grid(row=4,column=0, padx=10, pady=10)
+			ulabel4.grid(row=5,column=0, padx=10, pady=10)
+			ulabel5.grid(row=6,column=0, padx=10, pady=10)
+			ulabel6.grid(row=1,column=0, padx=10, pady=10)
+			uentry1.grid(row=2,column=1, padx=10, pady=10)
+			uentry2.grid(row=3,column=1, padx=10, pady=10)
+			uentry3.grid(row=4,column=1, padx=10, pady=10)
+			uentry4.grid(row=5,column=1, padx=10, pady=10)
+			uentry5.grid(row=6,column=1, padx=10, pady=10)
+			uentry6.grid(row=1,column=1, padx=10, pady=10)
+			button8.grid(row=7,column=1, padx=10, pady=10)
+			button9.grid(row=7,column=0,padx=10,pady=10)
+
+			uentry1.insert(0,iname)
+			uentry2.insert(0,iprice)
+			uentry3.insert(0,iquantity)
+			uentry4.insert(0,icategory)
+			uentry5.insert(0,idiscount)
+			uentry6.insert(0,"Item Name")
+			entry6.insert(0,"SEARCH")
+
+			entry1.delete(0, END)
+			entry2.delete(0, END)
+			entry3.delete(0, END)
+			entry4.delete(0, END)
+			entry5.delete(0, END)
+			entry6.delete(0, END)
+		else:
+			messagebox.showinfo("Error","Element does not exist.")
 
 def clearitem():
     entry1.delete(0, END)
@@ -189,6 +204,7 @@ def qExit():
         root.destroy()
         return
 
+
 #All labels Entrys Button grid place
 label0 = Label(root,text="STATIONARY STORE MANAGEMENT SYSTEM ",bg="Black",fg="#F9FAE9",font=("Times", 27),width=39)
 label1 = Label(root,text="ENTER ITEM NAME",bg="black",relief="ridge",fg="white",bd=8,font=("Times", 12),width=25)
@@ -201,8 +217,6 @@ label4 = Label(root, text="ENTER ITEM CATEGORY",relief="ridge",bg="black",bd=8,f
 entry4 = Entry(root, font=("Times", 14),bd=8,width=25,bg="white")
 label5 = Label(root, text="ENTER ITEM DISCOUNT",bg="black",relief="ridge",fg="white",bd=8, font=("Times", 12),width=25)
 entry5 = Entry(root, font=("Times", 14),bd=8,width=25,bg="white")
-buttoncolor = "#49D810"
-buttonfg = "black"
 button1 = Button(root,activebackground="green", text="ADD ITEM",bd=8, bg=buttoncolor, fg=buttonfg, width=25, font=("Times", 12),command=additem)
 button2 = Button(root,activebackground="green", text="DELETE ITEM",bd=8, bg=buttoncolor, fg=buttonfg, width =25, font=("Times", 12),command=delete1)
 button3 = Button(root,activebackground="green", text="VIEW DATABASE",bd=8, bg=buttoncolor, fg=buttonfg, width =25, font=("Times", 12),command=showdatabase)
