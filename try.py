@@ -36,7 +36,7 @@ def additem():
 		entry3.delete(0, END)
 		entry4.delete(0, END)
 		entry5.delete(0, END)
-		messagebox.showinfo("ADD ITEM", "ITEM ADDED SUCCESSFULLY....!!!")
+		messagebox.showinfo("ADD ITEM", "ITEM ADDED SUCCESSFULLY")
 	except (mysql.connector.Error,mysql.connector.Warning) as e:
 		messagebox.showerror("Duplicate","You are trying to insert a item which is already present in database")
 
@@ -44,7 +44,7 @@ def delete1():
     e6 = entry6.get()
     my_cursor.execute("delete from stationary where item_name = '{0}'".format(str(e6)))
     mydb.commit()
-    messagebox.showinfo("DELETE ITEM", "ITEM DELETED SUCCESSFULLY....!!!")
+    messagebox.showinfo("DELETE ITEM", "ITEM DELETED SUCCESSFULLY")
 
 def showdatabase():
     root1 = Tk()
@@ -108,7 +108,6 @@ def update():
 				e3 = uentry3.get()
 				e4 = uentry4.get()
 				e5 = uentry5.get()
-				e6 = uentry6.get()
 				
 				if e1!="Update" or e1!="":
 					iname=e1
@@ -124,13 +123,12 @@ def update():
 				val = (str(iname),iprice,iquantity,str(icategory),idiscount,str(e6))
 				my_cursor.execute(sql,val)
 				mydb.commit()
-				messagebox.showinfo("UPDATE ITEM", "ITEM UPDATED SUCCESSFULLY....!!!")
+				messagebox.showinfo("UPDATE ITEM", "ITEM UPDATED SUCCESSFULLY")
 				uentry1.delete(0, END)
 				uentry2.delete(0, END)
 				uentry3.delete(0, END)
 				uentry4.delete(0, END)
 				uentry5.delete(0, END)
-				uentry6.delete(0, END)
 				root2.destroy()
 
 			def clearuitem():
@@ -155,30 +153,25 @@ def update():
 			uentry4 = Entry(root2, font=("Times", 14),bd=8,width=25,bg="white")
 			ulabel5 = Label(root2, text="ENTER ITEM DISCOUNT",bg="black",relief="ridge",fg="white",bd=8, font=("Times", 12),width=25)
 			uentry5 = Entry(root2, font=("Times", 14),bd=8,width=25,bg="white")
-			ulabel6 = Label(root2,text="ITEM NAME TO BE UPDATED",bg="black",relief="ridge",fg="white",bd=8,font=("Times", 12),width=25)
-			uentry6 = Entry(root2, font=("Times", 14),bd=8,width=25,bg="white")
 			ulabel0.grid(columnspan=6, padx=10, pady=10)
-			ulabel1.grid(row=2,column=0, padx=10, pady=10)
-			ulabel2.grid(row=3,column=0, padx=10, pady=10)
-			ulabel3.grid(row=4,column=0, padx=10, pady=10)
-			ulabel4.grid(row=5,column=0, padx=10, pady=10)
-			ulabel5.grid(row=6,column=0, padx=10, pady=10)
-			ulabel6.grid(row=1,column=0, padx=10, pady=10)
-			uentry1.grid(row=2,column=1, padx=10, pady=10)
-			uentry2.grid(row=3,column=1, padx=10, pady=10)
-			uentry3.grid(row=4,column=1, padx=10, pady=10)
-			uentry4.grid(row=5,column=1, padx=10, pady=10)
-			uentry5.grid(row=6,column=1, padx=10, pady=10)
-			uentry6.grid(row=1,column=1, padx=10, pady=10)
-			button8.grid(row=7,column=1, padx=10, pady=10)
-			button9.grid(row=7,column=0,padx=10,pady=10)
+			ulabel1.grid(row=1,column=0, padx=10, pady=10)
+			ulabel2.grid(row=2,column=0, padx=10, pady=10)
+			ulabel3.grid(row=3,column=0, padx=10, pady=10)
+			ulabel4.grid(row=4,column=0, padx=10, pady=10)
+			ulabel5.grid(row=5,column=0, padx=10, pady=10)
+			uentry1.grid(row=1,column=1, padx=10, pady=10)
+			uentry2.grid(row=2,column=1, padx=10, pady=10)
+			uentry3.grid(row=3,column=1, padx=10, pady=10)
+			uentry4.grid(row=4,column=1, padx=10, pady=10)
+			uentry5.grid(row=5,column=1, padx=10, pady=10)
+			button8.grid(row=6,column=1, padx=10, pady=10)
+			button9.grid(row=6,column=0,padx=10,pady=10)
 
 			uentry1.insert(0,iname)
 			uentry2.insert(0,iprice)
 			uentry3.insert(0,iquantity)
 			uentry4.insert(0,icategory)
 			uentry5.insert(0,idiscount)
-			uentry6.insert(0,"Item Name")
 			entry6.insert(0,"SEARCH")
 
 			entry1.delete(0, END)
@@ -199,7 +192,7 @@ def clearitem():
     entry6.delete(0, END)
 
 def qExit():
-    qExit= messagebox.askyesno("Quit System","Do you want to quit? \n Project By :\n 1) Abhishek Wagh   Roll no : 23 \n 2) Tejas Zambre   Roll no : 26 \n 3) Ronak Sharma   Roll no : 30 \n 4) Kushagra Saxena   Roll no : 36 \n Thank You.....!!")
+    qExit= messagebox.askyesno("Quit System","Do you want to quit?\nThank You")
     if qExit > 0:
         root.destroy()
         return
