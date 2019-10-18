@@ -36,7 +36,7 @@ def additem():
 		entry3.delete(0, END)
 		entry4.delete(0, END)
 		entry5.delete(0, END)
-		messagebox.showinfo("ADD ITEM", "ITEM ADDED SUCCESSFULLY....!!!")
+		messagebox.showinfo("ADD ITEM", "ITEM ADDED SUCCESSFULLY")
 	except (mysql.connector.Error,mysql.connector.Warning) as e:
 		messagebox.showerror("Duplicate","You are trying to insert a item which is already present in database")
 
@@ -44,7 +44,7 @@ def delete1():
     e6 = entry6.get()
     my_cursor.execute("delete from stationary where item_name = '{0}'".format(str(e6)))
     mydb.commit()
-    messagebox.showinfo("DELETE ITEM", "ITEM DELETED SUCCESSFULLY....!!!")
+    messagebox.showinfo("DELETE ITEM", "ITEM DELETED SUCCESSFULLY")
 
 def showdatabase():
     root1 = Tk()
@@ -123,7 +123,7 @@ def update():
 				val = (str(iname),iprice,iquantity,str(icategory),idiscount,str(e6))
 				my_cursor.execute(sql,val)
 				mydb.commit()
-				messagebox.showinfo("UPDATE ITEM", "ITEM UPDATED SUCCESSFULLY....!!!")
+				messagebox.showinfo("UPDATE ITEM", "ITEM UPDATED SUCCESSFULLY")
 				uentry1.delete(0, END)
 				uentry2.delete(0, END)
 				uentry3.delete(0, END)
@@ -192,7 +192,7 @@ def clearitem():
     entry6.delete(0, END)
 
 def qExit():
-    qExit= messagebox.askyesno("Quit System","Do you want to quit? \n Project By :\n 1) Abhishek Wagh   Roll no : 23 \n 2) Tejas Zambre   Roll no : 26 \n 3) Ronak Sharma   Roll no : 30 \n 4) Kushagra Saxena   Roll no : 36 \n Thank You.....!!")
+    qExit= messagebox.askyesno("Quit System","Do you want to quit?\nThank You")
     if qExit > 0:
         root.destroy()
         return
