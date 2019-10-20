@@ -5,7 +5,7 @@ import os
 f=open("database_proj",'a+')
 
 root = Tk()
-root.title("Stationary Store Managment System")
+root.title("Stationary ShopManagment System")
 root.configure(width=1500,height=600,bg="Grey")
 var=-1
 #All functions
@@ -107,13 +107,13 @@ def clearitem():
 
 
 def qExit():
-    qExit= messagebox.askyesno("Quit System","Do you want to quit?")
+    qExit= messagebox.askyesno("Quit The System","Do you want to quit(y/n)?")
     if qExit > 0:
         root.destroy()
         return
 
 #All labels Entrys Button grid place
-label0= Label(root,text="STATIONARY STORE MANAGEMENT SYSTEM ",bg="Black",fg="#F9FAE9",font=("Times", 30))
+label0= Label(root,text="STATIONARY SHOP MANAGEMENT SYSTEM ",bg="Black",fg="#F9FAE9",font=("Times", 30))
 label1=Label(root,text="ENTER ITEM NAME",bg="black",relief="ridge",fg="white",bd=8,font=("Times", 12),width=25)
 entry1=Entry(root , font=("Times", 14),bd=8,width=25,bg="white")
 label2=Label(root, text="ENTER ITEM PRICE",relief="ridge",height="1",bg="black",bd=8,fg="white", font=("Times", 12),width=25)
