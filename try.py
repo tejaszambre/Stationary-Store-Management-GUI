@@ -9,7 +9,7 @@ my_cursor.execute("use Store")
 my_cursor.execute("create table if not exists stationary(item_name VARCHAR(20) not null unique, item_price INTEGER(10), item_quantity INTEGER(10), item_category VARCHAR(20), item_discount float(3), item_id INTEGER AUTO_INCREMENT PRIMARY KEY)")
 ##############################################################################################
 root = Tk()
-root.title("Stationary Store Managment System")
+root.title("Stationary Shop Managment System")
 root.configure(width=1500,height=600,bg="Grey")
 
 buttoncolor = "#49D810"
@@ -36,9 +36,9 @@ def additem():
 		entry3.delete(0, END)
 		entry4.delete(0, END)
 		entry5.delete(0, END)
-		messagebox.showinfo("ADD ITEM", "ITEM ADDED SUCCESSFULLY")
+		messagebox.showinfo(" ADD ITEM ", "ITEM ADDED SUCCESSFULLY")
 	except (mysql.connector.Error,mysql.connector.Warning) as e:
-		messagebox.showerror("Duplicate","You are trying to insert a item which is already present in database")
+		messagebox.showerror("Duplicate Data","You are trying to insert a item which is already present in database")
 
 def delete1():
     e6 = entry6.get()
@@ -49,7 +49,7 @@ def delete1():
 def showdatabase():
     root1 = Tk()
     root1.configure(bg="Grey")
-    root1.title("Stationary Store Database")
+    root1.title("Stationary Store Management Database")
     my_cursor.execute("select * from stationary")
     mytext1 = my_cursor.fetchall()
     mytext = Text(root1,width=90,height= 20 ,bg= "gray",fg="black", font=("Times", 12))
@@ -192,7 +192,7 @@ def clearitem():
     entry6.delete(0, END)
 
 def qExit():
-    qExit= messagebox.askyesno("Quit System","Do you want to quit?\nThank You")
+    qExit= messagebox.askyesno("Quit System","Do you want to quit(y/n)?\nThank You!!!!!!")
     if qExit > 0:
         root.destroy()
         return
