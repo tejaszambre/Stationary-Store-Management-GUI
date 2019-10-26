@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 import mysql.connector
-mydb = mysql.connector.connect(host= "localhost",user = "root",passwd="tejas")
+mydb = mysql.connector.connect(host= "localhost",user = "root",password= "root")
 my_cursor = mydb.cursor()
 ##############################################################################################
 my_cursor.execute("create database if not exists Store")
@@ -61,10 +61,10 @@ def searchitem():
 	entry5.delete(0, END)
 	e6 = entry6.get()
 	if e6 == "SEARCH":{
-		messagebox.showinfo("Warning","Please first enter Item name for search")
+		messagebox.showinfo("Warning","Please first enter item name for search")
 	}
 	elif e6 == "":{
-		messagebox.showinfo("Warning","Please enter the Item name for search")
+		messagebox.showinfo("Warning","Please enter the item name for search")
 	}
 
 	my_cursor.execute("select * from stationary where item_name = '{0}'".format(str(e6)))
