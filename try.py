@@ -67,21 +67,21 @@ def searchitem():
 	entry5.delete(0, END)
 	e6 = entry6.get()
 	if e6 == "SEARCH" or e6 == "":{
-		messagebox.showinfo("Warning","Please first enter Item name in search bar")
+		messagebox.showinfo("Warning","Please first enter item name for search")
 	}
+	
+	my_cursor.execute("select * from stationary where item_name = '{0}'".format(str(e6)))
+	mytext1 = my_cursor.fetchone()
+	if mytext1 == None:
+		messagebox.showinfo("Error","Element not exist")
 	else:
-		my_cursor.execute("select * from stationary where item_name = '{0}'".format(str(e6)))
-		mytext1 = my_cursor.fetchone()
-		if mytext1 == None:
-			messagebox.showinfo("Error","Element not exist in database")
-		else:
-			entry1.insert(0,mytext1[0])
-			entry2.insert(0,mytext1[1])
-			entry3.insert(0,mytext1[2])
-			entry4.insert(0,mytext1[3])
-			entry5.insert(0,mytext1[4])
-			entry6.delete(0, END)
-			entry6.insert(0,"SEARCH")
+		entry1.insert(0,mytext1[0])
+		entry2.insert(0,mytext1[1])
+		entry3.insert(0,mytext1[2])
+		entry4.insert(0,mytext1[3])
+		entry5.insert(0,mytext1[4])
+		entry6.delete(0, END)
+		entry6.insert(0,"SEARCH")
 
 def update():
 	e6 = entry6.get()
