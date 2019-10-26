@@ -60,13 +60,10 @@ def searchitem():
 	entry4.delete(0, END)
 	entry5.delete(0, END)
 	e6 = entry6.get()
-	if e6 == "SEARCH":{
+	if e6 == "SEARCH" or e6 == "":{
 		messagebox.showinfo("Warning","Please first enter item name for search")
 	}
-	elif e6 == "":{
-		messagebox.showinfo("Warning","Please enter the item name for search")
-	}
-
+	
 	my_cursor.execute("select * from stationary where item_name = '{0}'".format(str(e6)))
 	mytext1 = my_cursor.fetchone()
 	if mytext1 == None:
